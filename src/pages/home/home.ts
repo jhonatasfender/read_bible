@@ -15,7 +15,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 })
 export class HomePage {
 
-	public print: string;
+	public print: string = "aguarde está executando";
 
 	constructor(
         private sqlite: SQLite,
@@ -31,16 +31,16 @@ export class HomePage {
 	        	this.list().then((t) => {
 	        		this.print = JSON.stringify(t);
 		            db.executeSql(t, {}).then((data) => {
-		                this.alert("Mensagem",JSON.stringify({title: "TABLE CREATED: ", success: data}));
+		                this.print = "Mensagem",JSON.stringify({title: "TABLE CREATED: ", success: data});
 		            }, (error) => {
-		                this.alert("Mensagem",JSON.stringify({title:"Unable to execute sql", erro: error}));
+		                this.print = JSON.stringify({title:"Unable to execute sql", erro: error});
 		            })
 	        	});
 	        }, (error) => {
 	            this.print = JSON.stringify(error);
 	        });
 		} catch (e) {
-			
+	        this.print = JSON.stringify(e);
 		}
 	}
 

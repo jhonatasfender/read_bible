@@ -1,5 +1,6 @@
 {
-  "name": "bible",
-  "app_id": "",
-  "type": "ionic-angular"
+  "name": "app-credenciamento",
+  "app_id": "d481b434",
+  "type": "ionic-angular",
+  "integrations": {}
 }

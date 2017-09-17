@@ -1,70 +1,56 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { lightBootstrapDashboard } from '../../app/light-bootstrap-dashboard';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage extends lightBootstrapDashboard {
 
-	public print: string = "aguarde está executando";
+	private list: Array<{
+		value: string,
+		icon: string
+	}>;
 
 	constructor(
-        private sqlite: SQLite,
-		public navCtrl: NavController,
-        private alertCtrl: AlertController,
-		public http: Http
+		public navCtrl: NavController
 	) {
-		try {
-	        this.sqlite.create({
-	            name: "data.db",
-	            location: "default"
-	        }).then((db: SQLiteObject) => {
-	        	this.list().then((t) => {
-	        		this.print = JSON.stringify(t);
-		            db.executeSql(t, {}).then((data) => {
-		                this.print = "Mensagem",JSON.stringify({title: "TABLE CREATED: ", success: data});
-		            }, (error) => {
-		                this.print = JSON.stringify({title:"Unable to execute sql", erro: error});
-		            })
-	        	});
-	        }, (error) => {
-	            this.print = JSON.stringify(error);
-	        });
-		} catch (e) {
-	        this.print = JSON.stringify(e);
-		}
+		super();
+		this._list();
 	}
 
-	public list() {
-        try { 
-            return this.http.get("https://raw.githubusercontent.com/thiagobodruk/biblia/master/sql/aa.sql")
-                .toPromise()
-                .then(response => {                	
-                        return response.json();
-                    },
-                    e => {
-                        console.log(e)
-                    });
-        } catch(e) {
-            console.log(e);
-        }
-	}
-
-   	public alert(t,s) {
-        let alert = this.alertCtrl.create({
-            title: t,
-            subTitle: s,
-            buttons: ['OK']
-        });
-        alert.present();
+	ngAfterViewInit() {
+        this.init();
     }
+
+    private _list() {
+    	this.list = new Array();
+		this.list.push({
+			value: 'Agenda',
+			icon: 'pe-7s-date'
+		});
+		this.list.push({
+			value: 'Credencial',
+			icon: 'pe-7s-id'
+		});
+		this.list.push({
+			value: 'O Evento',
+			icon: 'pe-7s-light'
+		});
+		this.list.push({
+			value: 'Alertas',
+			icon: 'pe-7s-bell'
+		});
+		this.list.push({
+			value: 'Palestrantes',
+			icon: 'pe-7s-user'
+		});
+		this.list.push({
+			value: 'REGISTRAR',
+			icon: 'pe-7teste fa fa-qrcode'
+		});
+    }
+
 }

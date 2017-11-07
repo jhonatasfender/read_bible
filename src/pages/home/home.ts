@@ -1,21 +1,23 @@
 import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { JsonProvider } from '../../providers/json/json';
 
 import { lightBootstrapDashboard } from '../../app/light-bootstrap-dashboard';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
 export class HomePage extends lightBootstrapDashboard {
 
 	private list: Array<{
-		value: string,
-		icon: string
+		abrev: string,
+		name: string
 	}>;
 
 	constructor(
-		public navCtrl: NavController
+		public navCtrl: NavController,
+		public _json: JsonProvider
 	) {
 		super();
 		this._list();
@@ -27,30 +29,29 @@ export class HomePage extends lightBootstrapDashboard {
 
     private _list() {
     	this.list = new Array();
-		this.list.push({
-			value: 'Agenda',
-			icon: 'pe-7s-date'
-		});
-		this.list.push({
-			value: 'Credencial',
-			icon: 'pe-7s-id'
-		});
-		this.list.push({
-			value: 'O Evento',
-			icon: 'pe-7s-light'
-		});
-		this.list.push({
-			value: 'Alertas',
-			icon: 'pe-7s-bell'
-		});
-		this.list.push({
-			value: 'Palestrantes',
-			icon: 'pe-7s-user'
-		});
-		this.list.push({
-			value: 'REGISTRAR',
-			icon: 'pe-7teste fa fa-qrcode'
-		});
+    	this._json.get().subscribe((t) => {
+    		for (let i in t) {
+    			let a = t[i]
+    			this.list.push({
+    				abrev: a.abbrev,
+    				name: a.book
+    			});
+    		}
+    	});
+    }
+
+    public validInt($n) {
+    	return /\d/g.test($n);
+    }
+
+    public returnInt(s) {
+    	return s.substring(0,1);
+    }
+
+    public abrev($n) {
+    	console.log(/\d/g.test($n));
+    	let s = $n.replace(/\d/g,'');
+    	return s.substring(0,1).toUpperCase() + s.substring(1,s.length);
     }
 
 }

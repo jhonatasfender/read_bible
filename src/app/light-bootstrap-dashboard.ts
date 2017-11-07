@@ -1,37 +1,5 @@
-/*! =========================================================
- *
- * Light Bootstrap Dashboard PRO - V1.3.0
- *
- * =========================================================
- *
- * Copyright 2016 Creative Tim
- * Available with purchase of license from http://www.creative-tim.com/product/light-bootstrap-dashboard-pro
- *
- *                       _oo0oo_
- *                      o8888888o
- *                      88" . "88
- *                      (| -_- |)
- *                      0\  =  /0
- *                    ___/`---'\___
- *                  .' \\|     |// '.
- *                 / \\|||  :  |||// \
- *                / _||||| -:- |||||- \
- *               |   | \\\  -  /// |   |
- *               | \_|  ''\---/''  |_/ |
- *               \  .-\__  '-'  ___/-. /
- *             ___'. .'  /--.--\  `. .'___
- *          ."" '<  `.___\_<|>_/___.' >' "".
- *         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
- *         \  \ `_.   \_ __\ /__ _/   .-` /  /
- *     =====`-.____`.___ \_____/___.-`___.-'=====
- *                       `=---='
- *
- *     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
- *               Buddha Bless:  "No Bugs"
- *
- * ========================================================= */
 import { ViewChild, ElementRef } from '@angular/core';
+import { Util } from '../data/util/util';
 
 declare var $; 
 declare var navigator; 
@@ -44,7 +12,7 @@ export class misc {
 
 };
 
-export class lbd {
+export class lbd extends Util {
 
     @ViewChild('nav') nav: ElementRef;
 
@@ -75,6 +43,7 @@ export class lbd {
     protected image_src: any;
     protected $navbar_form: any;
     protected $nav_content: any;
+
 
     protected debounce(func: any, wait: any, immediate: any): any {
         let timeout;

@@ -1,6 +1,6 @@
 {
-  "name": "app-credenciamento",
-  "app_id": "d481b434",
+  "name": "read_bible",
+  "app_id": "",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

@@ -1,21 +1,28 @@
-.titleAbrev {	
-    font-size: 75PX;
-    margin-top: -33px;
-    margin-bottom: -11px;
+pre {
+	outline: 1px solid #ccc; 
+	padding: 5px; 
+	margin: 5px; 
+}
+.string { 
+	color: green; 
+}
+.number { 
+	color: darkorange; 
+}
+.boolean { 
+	color: blue; 
+}
+.null { 
+	color: magenta; 
+}
+.key { 
+	color: red; 
 }
 
-.all-icons {
-	div { 
-		span {
-		    padding: 11px 19px 11px 19px;
-		    border-radius: 50%;
-		    background: #488aff;
-		    color: white;
-		    font-size: 27px;
-		    font-weight: bold;
-			margin-left: 18%;	
-			position: absolute;
-			margin-top: -43%;
-		}
+section {
+	display: flex !important;
+	.abbrev {
+		margin: 5px;
+		flex-wrap: wrap-reverse;
 	}
 }

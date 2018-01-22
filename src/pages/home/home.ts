@@ -1,57 +1,36 @@
-import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { JsonProvider } from '../../providers/json/json';
 
-import { lightBootstrapDashboard } from '../../app/light-bootstrap-dashboard';
+import { db } from '../../db/db';
+
+import { lib } from '../../lib';
 
 @Component({
-	selector: 'page-home',
-	templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
-export class HomePage extends lightBootstrapDashboard {
+export class HomePage {
 
-	private list: Array<{
-		abrev: string,
-		name: string
-	}>;
+    public print:any;
+    
+    public lib: lib;
 
-	constructor(
-		public navCtrl: NavController,
-		public _json: JsonProvider
-	) {
-		super();
-		this._list();
-	}
+    public db:any;
 
-	ngAfterViewInit() {
-        this.init();
-    }
+    public list: any;
 
-    private _list() {
-    	this.list = new Array();
-    	this._json.get().subscribe((t) => {
-    		for (let i in t) {
-    			let a = t[i]
-    			this.list.push({
-    				abrev: a.abbrev,
-    				name: a.book
-    			});
-    		}
-    	});
-    }
-
-    public validInt($n) {
-    	return /\d/g.test($n);
-    }
-
-    public returnInt(s) {
-    	return s.substring(0,1);
-    }
-
-    public abrev($n) {
-    	console.log(/\d/g.test($n));
-    	let s = $n.replace(/\d/g,'');
-    	return s.substring(0,1).toUpperCase() + s.substring(1,s.length);
+    constructor(
+        public navCtrl: NavController
+    ) {
+        this.lib = new lib();
+        // this.print = this.lib.syntaxHighlight(JSON.stringify(db, undefined, 4));
+        this.db = new Array();
+        for(let i in db.json) {
+            this.db.push({
+                abbrev: db.json[i].abbrev,
+                color: this.lib.generatesColor()
+            });
+        }
     }
 
 }

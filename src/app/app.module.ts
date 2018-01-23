@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import { SQLite } from '@ionic-native/sqlite';
 import { SqlProvider } from '../providers/sql/sql';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -30,7 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
 	providers: [
 		StatusBar,
 		SplashScreen,
-		SQLite,
 		{
 			provide: ErrorHandler, 
 			useClass: IonicErrorHandler

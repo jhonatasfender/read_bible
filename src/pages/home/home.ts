@@ -5,6 +5,8 @@ import { db } from '../../db/db';
 
 import { lib } from '../../lib';
 
+declare var d3;
+
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -31,6 +33,28 @@ export class HomePage {
                 color: this.lib.generatesColor()
             });
         }
+    }
+
+    ngOnInit() {
+        var width = 960,
+        height = 500,
+        radius = 30;
+
+        var p0 = [250, 200, 60],
+        p1 = [560, 300, 120];
+
+        var svg = d3.select(".conteiner").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g");
+
+		svg.append("path")
+		.attr("class", "mesh")
+		// .attr("d", d3.hexbin().size([width, height]).radius(radius).mesh);
+		.attr("d", () => {
+			return "M 130,50 100,0 30,0 0,50 30,100 100,100 130,50"
+		});
+
     }
 
 }
